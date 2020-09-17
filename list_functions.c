@@ -61,20 +61,20 @@ stack_t *add_node_end(stack_t **head, const int n)
  *
  * Return: no return
  */
-void free_list(stack_t *head)
+void free_list(stack_t **head)
 {
-	if (head == NULL)
+	stack_t *ptr, *ptr2;
+
+	if (*head == NULL)
 		return;
 
-	while (head->next)
+	ptr = *head;
+	while (ptr)
 	{
-		if (head->next != NULL)
-		{
-			head = head->next;
-			free(head->prev);
-		}
+		ptr2 = ptr->next;
+		free(ptr);
+		ptr = ptr2;
 	}
-	free(head);
 }
 
 /**

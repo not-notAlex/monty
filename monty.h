@@ -60,7 +60,7 @@ stack_t *add_node_beginning(stack_t **head, const int n);
 stack_t *add_node_end(stack_t **head, const int n);
 stack_t *add_node(stack_t **head, unsigned int i, const int n);
 void delete_node(stack_t **head, unsigned int i);
-void free_list(stack_t *head);
+void free_list(stack_t **head);
 void op_push(stack_t **head, unsigned int n);
 void op_pall(stack_t **head, unsigned int n);
 void op_pint(stack_t **head, unsigned int n);

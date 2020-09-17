@@ -10,7 +10,7 @@
 void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 {
 	char *coms[2];
-	int k = 0, i = 1;
+	int k = 0, i = 0;
 
 	coms[0] = strtok(tokens, " ");
 	coms[1] = strtok(NULL, " ");
@@ -22,14 +22,15 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 		{
 			if (coms[1] != NULL)
 			{
+				i = 0;
 				while (coms[1][i])
 				{
 					if (coms[1][i] > 57 || coms[1][i] < 48)
 					{
 						printf("L%d: usage: push integer\n", values.line_num);
-						free_list(*head);
 						free(*(values.buf));
-						return;
+						free_list(head);
+						exit(EXIT_FAILURE);
 					}
 					i++;
 				}

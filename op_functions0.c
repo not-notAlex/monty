@@ -13,7 +13,7 @@ void op_push(stack_t **head, unsigned int n)
 	if (values.has_value == 0)
 	{
 		printf("L%d: usage: push integer\n", values.line_num);
-		free_list(*head);
+		free_list(head);
 		free(*(values.buf));
 		exit(EXIT_FAILURE);
 	}

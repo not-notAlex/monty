@@ -45,7 +45,7 @@ int main(int ac, char *argv[])
 		values.line_num++;
 	}
 	free(buf);
-	free_list(head);
+	free_list(&head);
 	close(i);
 	return (0);
 }
