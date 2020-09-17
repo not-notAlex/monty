@@ -15,6 +15,7 @@ stack_t *add_node_beginning(stack_t **head, const int n)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	node->n = n;
@@ -45,6 +46,7 @@ stack_t *add_node_end(stack_t **head, const int n)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	node->n = n;
@@ -113,6 +115,7 @@ stack_t *add_node(stack_t **head, unsigned int i, const int n)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	node->n = n;
