@@ -4,22 +4,39 @@
  * execute_commands - executes the monty commands
  * @tokens: tkens to parse
  * @ints: instructions
+ * @head: head of list
  * Return: no return
  */
-void execute_commands(char *tokens, instruction_t ints[])
+void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 {
 	char *coms[2];
-	int k = 0, num = 0;
+	int k = 0, i = 1;
 
 	coms[0] = strtok(tokens, " ");
 	coms[1] = strtok(NULL, " ");
+	values.has_value = 0;
+	values.value = 0;
 	while (ints[k].opcode)
 	{
 		if (_strcmp(coms[0], ints[k].opcode))
 		{
 			if (coms[1] != NULL)
-				num = atoi(coms[1]);
-			ints[k].f(&head, num);
+			{
+				while (coms[1][i])
+				{
+					if (coms[1][i] > 57 || coms[1][i] < 48)
+					{
+						printf("L%d: usage: push integer\n", values.line_num);
+						free_list(*head);
+						free(*(values.buf));
+						return;
+					}
+					i++;
+				}
+				values.value = atoi(coms[1]);
+				values.has_value = 1;
+			}
+			ints[k].f(head, values.line_num);
 			return;
 		}
 		k++;

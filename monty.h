@@ -20,9 +20,9 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
 
 /**
@@ -35,11 +35,26 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *head;
+/**
+ * struct global_info - contains gloabl info to use
+ * @value: value of opcode
+ * @file_descriptor: - pointer to opened file
+ * Description: Stores information to be used in other areas
+ */
+typedef struct gloabl_info
+{
+	int value;
+	int *file_descriptor;
+	int line_num;
+	char **buf;
+	int has_value;
+} g_i;
+
+extern g_i values;
 
 stack_t *add_node_beginning(stack_t **head, const int n);
 stack_t *add_node_end(stack_t **head, const int n);
@@ -53,7 +68,8 @@ void op_pop(stack_t **head, unsigned int n);
 void op_swap(stack_t **head, unsigned int n);
 void op_add(stack_t **head, unsigned int n);
 void op_nop(stack_t **head, unsigned int n);
-void execute_commands(char *tokens, instruction_t ints[]);
+void execute_commands(char *tokens, instruction_t ints[], stack_t **head);
 int _strcmp(char *str1, char *str2);
+void run_error(int n, char *str);
 
 #endif

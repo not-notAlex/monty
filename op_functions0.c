@@ -9,7 +9,15 @@
 void op_push(stack_t **head, unsigned int n)
 {
 	(void)head;
-	add_node_beginning(head, n);
+	(void)n;
+	if (values.has_value == 0)
+	{
+		printf("L%d: usage: push integer\n", values.line_num);
+		free_list(*head);
+		free(*(values.buf));
+		exit(EXIT_FAILURE);
+	}
+	add_node_beginning(head, values.value);
 }
 
 /**
