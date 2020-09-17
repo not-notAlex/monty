@@ -21,13 +21,11 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	if (coms[0] == NULL)
 		return;
 	coms[1] = strtok(NULL, " ");
-	values.value = 0;
-	for (k = 0; ints[k].opcode; k++)
+	for (k = 0; ints[k].opcode; k++, i = 0)
 		if (_strcmp(coms[0], ints[k].opcode))
 		{
 			if (coms[1] != NULL)
 			{
-				i = 0;
 				if (coms[1][0] == 45)
 					i++;
 				while (coms[1][i])
@@ -36,6 +34,7 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 					{
 						fprintf(stderr, "L%d: usage: push integer\n", values.line_num);
 						free_list(head);
+						close(*(values.file_descriptor));
 						exit(EXIT_FAILURE);
 					}
 					i++;
@@ -48,6 +47,7 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 		}
 	fprintf(stderr, "L%d: unknown instruction %s\n", values.line_num, coms[0]);
 	free_list(head);
+	close(*(values.file_descriptor));
 	exit(EXIT_FAILURE);
 }
 

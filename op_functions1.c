@@ -14,6 +14,7 @@ void op_add(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", values.line_num);
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 

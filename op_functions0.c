@@ -14,6 +14,7 @@ void op_push(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", values.line_num);
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	add_node_beginning(head, values.value);
@@ -49,6 +50,7 @@ void op_pint(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", values.line_num);
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*head)->n);
@@ -67,6 +69,7 @@ void op_pop(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", values.line_num);
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 	delete_node(head, 0);
@@ -86,6 +89,7 @@ void op_swap(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", values.line_num);
 		free_list(head);
+		close(*(values.file_descriptor));
 		exit(EXIT_FAILURE);
 	}
 

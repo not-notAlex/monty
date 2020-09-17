@@ -18,7 +18,7 @@ int main(int ac, char *argv[])
 		{"swap", &op_swap}, {"add", &op_add}, {"nop", &op_nop}, {NULL, NULL}
 	};
 
-	if (ac < 2 || ac > 2)
+	if (ac != 2)
 		run_error(0, argv[1]);
 	i = open(argv[1], O_RDONLY);
 	if (i == -1)
@@ -43,10 +43,10 @@ int main(int ac, char *argv[])
 	while (tokens[k])
 	{
 		values.has_value = 0;
+		values.value = 0;
 		execute_commands(tokens[k++], ints, &head);
 		values.line_num++;
 	}
-
 	free_list(&head);
 	close(i);
 	return (0);
