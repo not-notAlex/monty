@@ -14,7 +14,6 @@ void op_push(stack_t **head, unsigned int n)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", values.line_num);
 		free_list(head);
-		free(*(values.buf));
 		exit(EXIT_FAILURE);
 	}
 	add_node_beginning(head, values.value);
@@ -46,7 +45,12 @@ void op_pall(stack_t **head, unsigned int n)
 void op_pint(stack_t **head, unsigned int n)
 {
 	(void)n;
-
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", values.line_num);
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	printf("%d\n", (*head)->n);
 }
 
