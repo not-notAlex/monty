@@ -13,11 +13,10 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	int k = 0, i = 0;
 
 	coms[0] = strtok(tokens, " ");
-	if (coms[0] == NULL || tokens[0] == '*')
+	if (coms[0] == NULL)
 	{
-		printf("L%d: unknown instruction <opcode>\n", values.line_num);
-		free_list(head);
-		exit(EXIT_FAILURE);
+		values.line_num--;
+		return;
 	}
 	coms[1] = strtok(NULL, " ");
 	values.has_value = 0;
@@ -34,7 +33,6 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 					if (coms[1][i] > 57 || coms[1][i] < 48)
 					{
 						printf("L%d: usage: push integer\n", values.line_num);
-						free(*(values.buf));
 						free_list(head);
 						exit(EXIT_FAILURE);
 					}

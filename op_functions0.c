@@ -32,7 +32,7 @@ void op_pall(stack_t **head, unsigned int n)
 	(void)n;
 	while (ptr)
 	{
-		fprintf(stdout, "%d\n", ptr->n);
+		printf("%d\n", ptr->n);
 		ptr = ptr->next;
 	}
 }

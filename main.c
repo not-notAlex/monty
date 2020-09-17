@@ -30,9 +30,6 @@ int main(int ac, char *argv[])
 		tokens[m] = NULL;
 	}
 	read(i, buf, 1024);
-	for (m = 0; m < 1024; m++)
-		if (buf[m] == '\n' && buf[m + 1] == '\n')
-			buf[m + 1] = '*';
 	tok = strtok(buf, "\n");
 	while (tok != NULL)
 	{
