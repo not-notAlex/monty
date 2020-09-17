@@ -58,12 +58,12 @@ void run_error(int n, char *str)
 {
 	if (n == 0)
 	{
-		printf("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	if (n == 1)
 	{
-		printf("Error: Can't open file %s\n", str);
+		fprintf(stderr, "Error: Can't open file %s\n", str);
 		exit(EXIT_FAILURE);
 	}
 }

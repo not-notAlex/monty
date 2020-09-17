@@ -32,7 +32,7 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 				{
 					if (coms[1][i] > 57 || coms[1][i] < 48)
 					{
-						printf("L%d: usage: push integer\n", values.line_num);
+						fprintf(stderr, "L%d: usage: push integer\n", values.line_num);
 						free_list(head);
 						exit(EXIT_FAILURE);
 					}
