@@ -12,6 +12,11 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	char *coms[2];
 	int k = 0, i = 0;
 
+	if (tokens[0] == '*')
+	{
+		values.line_num++;
+		tokens++;
+	}
 	coms[0] = strtok(tokens, " ");
 	if (coms[0] == NULL)
 		return;
