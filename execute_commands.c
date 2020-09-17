@@ -13,6 +13,12 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	int k = 0, i = 0;
 
 	coms[0] = strtok(tokens, " ");
+	if (coms[0] == NULL || tokens[0] == '*')
+	{
+		printf("L%d: unknown instruction <opcode>\n", values.line_num);
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	coms[1] = strtok(NULL, " ");
 	values.has_value = 0;
 	values.value = 0;

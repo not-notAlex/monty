@@ -12,7 +12,7 @@ int main(int ac, char *argv[])
 {
 	stack_t *head = NULL;
 	int i, k = 0, j = 0, m = 0;
-	char *buf, *tokens[1024], *tok;
+	char buf[1024], *tokens[1024], *tok;
 	instruction_t ints[] = {
 		{"push", op_push}, {"pall", &op_pall}, {"pint", &op_pint}, {"pop", &op_pop},
 		{"swap", &op_swap}, {"add", &op_add}, {"nop", &op_nop}, {NULL, NULL}
@@ -24,14 +24,15 @@ int main(int ac, char *argv[])
 	if (i == -1)
 		run_error(1, argv[1]);
 	values.file_descriptor = &i;
-	buf = malloc(1024);
-	values.buf = &buf;
 	for (m = 0; m < 1024; m++)
 	{
 		buf[m] = '\0';
 		tokens[m] = NULL;
 	}
 	read(i, buf, 1024);
+	for (m = 0; m < 1024; m++)
+		if (buf[m] == '\n' && buf[m + 1] == '\n')
+			buf[m + 1] = '*';
 	tok = strtok(buf, "\n");
 	while (tok != NULL)
 	{
@@ -44,7 +45,7 @@ int main(int ac, char *argv[])
 		execute_commands(tokens[k++], ints, &head);
 		values.line_num++;
 	}
-	free(buf);
+
 	free_list(&head);
 	close(i);
 	return (0);
