@@ -35,7 +35,6 @@ int main(int ac, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	buf = malloc(1024);
-
 	read(i, buf, 1024);
 	tok = strtok(buf, "\n");
 	while (tok != NULL)
@@ -44,14 +43,10 @@ int main(int ac, char *argv[])
 		j++;
 		tok = strtok(NULL, "\n");
 	}
-
 	while (tokens[k])
-	{
-		execute_commands(tokens[k], ints);
-		k++;
-	}
-
+		execute_commands(tokens[k++], ints);
 	free(buf);
+	free_list(head);
 	close(i);
 	return (0);
 }
