@@ -12,7 +12,11 @@ stack_t *add_node_beginning(stack_t **head, const int n)
 
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		return (NULL);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	node->n = n;
 	node->next = *head;
 	node->prev = NULL;
@@ -38,7 +42,11 @@ stack_t *add_node_end(stack_t **head, const int n)
 
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		return (NULL);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	node->n = n;
 	node->next = NULL;
 	if (*head == NULL)
@@ -102,7 +110,11 @@ stack_t *add_node(stack_t **head, unsigned int i, const int n)
 		return (add_node_end(head, n));
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		return (NULL);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	node->n = n;
 	ptr->prev->next = node;
 	node->next = ptr;
