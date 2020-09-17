@@ -10,7 +10,7 @@
 void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 {
 	char *coms[2];
-	int k = 0, i = 0;
+	int k, i = 0;
 
 	if (tokens[0] == '*')
 	{
@@ -23,8 +23,7 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	coms[1] = strtok(NULL, " ");
 	values.has_value = 0;
 	values.value = 0;
-	while (ints[k].opcode)
-	{
+	for (k = 0; ints[k].opcode; k++)
 		if (_strcmp(coms[0], ints[k].opcode))
 		{
 			if (coms[1] != NULL)
@@ -46,8 +45,9 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 			ints[k].f(head, values.line_num);
 			return;
 		}
-		k++;
-	}
+	fprintf(stderr, "L%d: unknown instruction %s\n", values.line_num, coms[0]);
+	free_list(head);
+	exit(EXIT_FAILURE);
 }
 
 /**
