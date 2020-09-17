@@ -24,8 +24,16 @@ int main(int ac, char *argv[])
 	};
 
 	if (ac < 2 || ac > 2)
-		printf("ERROR!\n");
+	{
+		printf("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 	i = open(argv[1], O_RDONLY);
+	if (i == -1)
+	{
+		printf("Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
 	buf = malloc(1024);
 
 	read(i, buf, 1024);
