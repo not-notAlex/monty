@@ -63,6 +63,12 @@ void op_pint(stack_t **head, unsigned int n)
 void op_pop(stack_t **head, unsigned int n)
 {
 	(void)n;
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", values.line_num);
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
 	delete_node(head, 0);
 }
 
