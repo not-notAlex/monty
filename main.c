@@ -12,7 +12,7 @@ int main(int ac, char *argv[])
 {
 	stack_t *head = NULL;
 	int i, k = 0, j = 0, m = 0;
-	char buf[1024], *tokens[1024], *tok;
+	char buf[10000], *tokens[10000], *tok;
 	instruction_t ints[] = {
 		{"push", op_push}, {"pall", &op_pall}, {"pint", &op_pint}, {"pop", &op_pop},
 		{"swap", &op_swap}, {"add", &op_add}, {"nop", &op_nop}, {NULL, NULL}
@@ -24,7 +24,7 @@ int main(int ac, char *argv[])
 	if (i == -1)
 		run_error(1, argv[1]);
 	values.file_descriptor = &i;
-	for (m = 0; m < 1024; m++)
+	for (m = 0; m < 10000; m++)
 	{
 		buf[m] = '\0';
 		tokens[m] = NULL;
