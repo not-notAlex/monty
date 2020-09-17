@@ -21,7 +21,6 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 	if (coms[0] == NULL)
 		return;
 	coms[1] = strtok(NULL, " ");
-	values.has_value = 0;
 	values.value = 0;
 	for (k = 0; ints[k].opcode; k++)
 		if (_strcmp(coms[0], ints[k].opcode))
@@ -29,6 +28,8 @@ void execute_commands(char *tokens, instruction_t ints[], stack_t **head)
 			if (coms[1] != NULL)
 			{
 				i = 0;
+				if (coms[1][0] == 45)
+					i++;
 				while (coms[1][i])
 				{
 					if ((coms[1][i] > 57 || coms[1][i] < 48) && k == 0)

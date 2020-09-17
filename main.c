@@ -42,6 +42,7 @@ int main(int ac, char *argv[])
 	}
 	while (tokens[k])
 	{
+		values.has_value = 0;
 		execute_commands(tokens[k++], ints, &head);
 		values.line_num++;
 	}
