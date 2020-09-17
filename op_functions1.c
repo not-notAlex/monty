@@ -8,8 +8,16 @@
  */
 void op_add(stack_t **head, unsigned int n)
 {
-	int tmp = (*head)->n;
+	int tmp;
 
+	if (*head == NULL || (*head)->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", values.line_num);
+		free_list(head);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = (*head)->n;
 	(void)n;
 	delete_node(head, 0);
 	(*head)->n += tmp;
